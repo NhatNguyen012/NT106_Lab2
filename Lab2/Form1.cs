@@ -44,5 +44,10 @@ namespace Lab2
             form.ShowDialog();
             this.Show();
         }
+
+        private void btn_Exit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
