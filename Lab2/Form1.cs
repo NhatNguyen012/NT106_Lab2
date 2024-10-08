@@ -22,7 +22,13 @@ namespace Lab2
             form.ShowDialog();
             this.Show();
         }
-
+        private void btn_BT4_Click(object sender, EventArgs e)
+        {
+            BT4 form = new BT4();
+            this.Hide();
+            form.ShowDialog();
+            this.Show();
+         }
         private void btn_BT3_Click(object sender, EventArgs e)
         {
             BT3 form = new BT3();
