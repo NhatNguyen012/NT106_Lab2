@@ -100,6 +100,7 @@
             btn_Exit.TabIndex = 5;
             btn_Exit.Text = "Exit";
             btn_Exit.UseVisualStyleBackColor = true;
+            btn_Exit.Click += btn_Exit_Click;
             // 
             // btn_clean
             // 
