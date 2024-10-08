@@ -28,10 +28,18 @@ namespace Lab2
             this.Hide();
             form.ShowDialog();
             this.Show();
-         }
+        }
         private void btn_BT3_Click(object sender, EventArgs e)
         {
             BT3 form = new BT3();
+            this.Hide();
+            form.ShowDialog();
+            this.Show();
+        }
+
+        private void btn_BT5_Click(object sender, EventArgs e)
+        {
+            BT5 form = new BT5();
             this.Hide();
             form.ShowDialog();
             this.Show();

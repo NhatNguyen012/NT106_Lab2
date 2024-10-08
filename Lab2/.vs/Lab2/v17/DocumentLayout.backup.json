@@ -32,7 +32,7 @@
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "D:\\File UIT\\M\u00F4n chuy\u00EAn ng\u00E0nh\\NT106 _ L\u1EADp tr\u00ECnh m\u1EA1ng c\u0103n b\u1EA3n\\C\u00E1c b\u00E0i t\u1EADp TH\\Lab 2\\Lab2\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAD4vywAAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAABUAAAAAAAAAAAAYwB0AAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-08T06:02:26.81Z",
               "EditorCaption": ""
@@ -43,11 +43,10 @@
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "D:\\File UIT\\M\u00F4n chuy\u00EAn ng\u00E0nh\\NT106 _ L\u1EADp tr\u00ECnh m\u1EA1ng c\u0103n b\u1EA3n\\C\u00E1c b\u00E0i t\u1EADp TH\\Lab 2\\Lab2\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "D:\\File UIT\\M\u00F4n chuy\u00EAn ng\u00E0nh\\NT106 _ L\u1EADp tr\u00ECnh m\u1EA1ng c\u0103n b\u1EA3n\\C\u00E1c b\u00E0i t\u1EADp TH\\Lab 2\\Lab2\\Form1.cs [Design]",
-              "RelativeToolTip": "Form1.cs [Design]",
+              "ToolTip": "D:\\0. UIT\\HK3\\LTMCB\\3. Thuc Hanh\\LAB_02\\NT106_Lab2\\Lab2\\Form1.cs [Design]",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\0. UIT\\HK3\\LTMCB\\3. Thuc Hanh\\LAB_02\\NT106_Lab2\\Lab2\\Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-08T06:02:01.938Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2024-10-08T06:02:01.938Z"
             },
             {
               "$type": "Document",
@@ -59,8 +58,7 @@
               "RelativeToolTip": "Form1.Designer.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-08T06:01:51.06Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-08T06:01:51.06Z"
             }
           ]
         }
