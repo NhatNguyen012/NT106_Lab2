@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -55,8 +56,9 @@ namespace Lab2
                 using (FileStream reader = File.Open(filePath, FileMode.Open))
                 {
                     bytes = new Byte[reader.Length];
-                    await fs.ReadAsync(bytes, 0, (int)bytes.Length);
+                    await reader.ReadAsync(bytes, 0, (int)reader.Length); // Sử dụng 'reader' thay vì 'fs'
                 }
+
                 string content = Encoding.UTF8.GetString(bytes);
                 tb_Input.Text = content.ToString();
                 tb_Input.ReadOnly = false;
@@ -65,8 +67,9 @@ namespace Lab2
             {
                 MessageBox.Show("Lỗi đọc tệp: " + ex.Message);
             }
+
         }
-        
+
 
         private async void btn_Calculator_Click(object sender, EventArgs e)
         {
@@ -78,55 +81,48 @@ namespace Lab2
             tb_Output.Text = String.Empty;
             string content = tb_Input.Text;
             int indexLine = 0;
-            bool flag = true;
             int index = content.IndexOf('\n');
             string output = "";
+            string res;
+            string line;
             while (index >= 0)
             {
-                string line = content.Substring(0, index);
+                line = content.Substring(0, index);
                 indexLine++;
-                long res = 0;
-                if (startCalculator(line, indexLine, ref res) == 0)
+                res = CalculateExpression(line, indexLine);
+                if (res == "Không thể chia hết cho 0" || res == "Lỗi biểu thức")
                 {
-                    output += line + " = " + res.ToString() + Environment.NewLine;
+                    output += res + Environment.NewLine;
+
                 }
-                else
-                {
-                    flag = false;
-                    break;
-                }
+                else output += line + res + Environment.NewLine;
                 content = content.Substring(index + 1);
                 index = content.IndexOf('\n');
             }
             content = content.Replace("\n","");
             if (content.Length > 0)
             {
-                string line = content;
+                line = content.Replace("\r", "");
                 indexLine++;
-                long res = 0;
-                if (startCalculator(line, indexLine, ref res) == 0)
+                res = CalculateExpression(line, indexLine);
+                if (res == "Không thể chia hết cho 0" || res == "Lỗi biểu thức")
                 {
-                    output += line + " = " + res.ToString() + Environment.NewLine;
+                    output += res + Environment.NewLine;
+
                 }
-                else
-                {
-                    flag = false;
-                }
+                else output += line + " = " + res + Environment.NewLine;
                 /*MessageBox.Show("Bugggg: " + content.IndexOf("\n"));*/
             }
-            
-            if (flag)
+
+            string outFilePath = @"D:\0. UIT\HK3\LTMCB\3. Thuc Hanh\LAB_02\NT106_Lab2\Testcase\BT3\output.txt";
+            UnicodeEncoding uniencoding = new UnicodeEncoding();
+            byte[] result = uniencoding.GetBytes(output);
+            using (FileStream writer = new FileStream(outFilePath, FileMode.OpenOrCreate))
             {
-                string outFilePath = @"D:\0. UIT\HK3\LTMCB\3. Thuc Hanh\LAB_02\NT106_Lab2\Testcase\BT3\output.txt";
-                UnicodeEncoding uniencoding = new UnicodeEncoding();
-                byte[] result = uniencoding.GetBytes(output);
-                using (FileStream writer = new FileStream(outFilePath, FileMode.OpenOrCreate))
-                {
-                    writer.Seek(0, SeekOrigin.End);
-                    await writer.WriteAsync(result, 0, result.Length);
-                }
-                tb_Output.Text = output;
+                writer.Seek(0, SeekOrigin.End);
+                await writer.WriteAsync(result, 0, result.Length);
             }
+            tb_Output.Text = output;
 
         }
 
@@ -223,7 +219,7 @@ namespace Lab2
                 case '-': return a - b;
                 case '*': return a * b;
                 case '/':
-                    if (b == 0) throw new DivideByZeroException("Cannot divide by zero");
+                    if (b == 0) throw new DivideByZeroException("Không thể chia hết cho 0");
                     return a / b;
                 default: return 0;
             }
@@ -314,18 +310,18 @@ namespace Lab2
         }
 
         // Function to validate and calculate the expression
-        public static string CalculateExpression(string expr, int indexLine, ref double res)
+        public static string CalculateExpression(string expr, int indexLine)
         {
             try
             {
                 // Remove spaces and check for valid characters
-                expr = expr.Replace(" ", "");
+                expr = expr.Replace(" ", "").Replace("\n", "").Replace("\r", "");
                 foreach (char c in expr)
                 {
                     if (!char.IsDigit(c) && !IsOperator(c) && c != '(' && c != ')' && c != '.')
                     {
                         
-                        return "Invalid expression format.";
+                        return "Lỗi biểu thức";
                     }
                 }
 
@@ -336,8 +332,9 @@ namespace Lab2
             }
             catch (Exception ex)
             {
-                /*MessageBox.Show($"Lỗi ở dòng {indexLine}: " + ex.Message);*/
-                return $"Error evaluating expression: {ex.Message}";
+                if (ex.Message != "Không thể chia hết cho 0")
+                    return "Lỗi biểu thức";
+                return $"{ex.Message}";
             }
         }
     }
