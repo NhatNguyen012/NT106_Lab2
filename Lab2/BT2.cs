@@ -9,6 +9,7 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace Lab2
@@ -40,7 +41,6 @@ namespace Lab2
                     {
                         if (sr.Peek() != -1)
                         {
-                            // Nếu không phải kết thúc tệp, thêm "\r\n"
                             content.Append(line + "\r\n");
                         }
                         else
@@ -48,8 +48,6 @@ namespace Lab2
                             content.Append(line);
                         }
                         countLines++;
-                        string[] words = line.Split(' ');
-                        countWords += words.Length;
                     }
                 }
                 tb_ShowText.Text = content.ToString();
@@ -67,6 +65,10 @@ namespace Lab2
             // Hiển thị số dòng
             tb_Line.Text = countLines.ToString();
             // Hiển thị số từ
+            string text = tb_ShowText.Text.Trim();
+            /*string[] words = text.Split(' ');*/
+            string[] words = text.Split(new char[] { ' ', ',', '.', ':', ';', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            countWords = words.Length;
             tb_Word.Text = countWords.ToString();
             // Hiển thị số kí tự
             string newText = tb_ShowText.Text;
