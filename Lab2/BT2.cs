@@ -9,6 +9,7 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace Lab2
@@ -38,13 +39,18 @@ namespace Lab2
                     string line;
                     while ((line = sr.ReadLine()) != null)
                     {
-                        content.AppendLine(line);
-                        string[] words = line.Split(' ');
-                        countWords += words.Length;
+                        if (sr.Peek() != -1)
+                        {
+                            content.Append(line + "\r\n");
+                        }
+                        else
+                        {
+                            content.Append(line);
+                        }
+                        countLines++;
                     }
                 }
                 tb_ShowText.Text = content.ToString();
-                countLines = tb_ShowText.GetLineFromCharIndex(content.Length);
             }
             catch (Exception ex)
             {
@@ -59,11 +65,13 @@ namespace Lab2
             // Hiển thị số dòng
             tb_Line.Text = countLines.ToString();
             // Hiển thị số từ
+            string text = tb_ShowText.Text.Trim();
+            /*string[] words = text.Split(' ');*/
+            string[] words = text.Split(new char[] { ' ', ',', '.', ':', ';', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            countWords = words.Length;
             tb_Word.Text = countWords.ToString();
             // Hiển thị số kí tự
-            /*string newText = tb_ShowText.Text.Replace("\n", "");*/
             string newText = tb_ShowText.Text;
-            newText = tb_ShowText.Text.Replace("\r\n", "");
             string countChars = newText.Length.ToString();
             tb_Char.Text = countChars;
         }
