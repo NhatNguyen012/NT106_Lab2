@@ -38,13 +38,21 @@ namespace Lab2
                     string line;
                     while ((line = sr.ReadLine()) != null)
                     {
-                        content.AppendLine(line);
+                        if (sr.Peek() != -1)
+                        {
+                            // Nếu không phải kết thúc tệp, thêm "\r\n"
+                            content.Append(line + "\r\n");
+                        }
+                        else
+                        {
+                            content.Append(line);
+                        }
+                        countLines++;
                         string[] words = line.Split(' ');
                         countWords += words.Length;
                     }
                 }
                 tb_ShowText.Text = content.ToString();
-                countLines = tb_ShowText.GetLineFromCharIndex(content.Length);
             }
             catch (Exception ex)
             {
@@ -61,9 +69,7 @@ namespace Lab2
             // Hiển thị số từ
             tb_Word.Text = countWords.ToString();
             // Hiển thị số kí tự
-            /*string newText = tb_ShowText.Text.Replace("\n", "");*/
             string newText = tb_ShowText.Text;
-            newText = tb_ShowText.Text.Replace("\r\n", "");
             string countChars = newText.Length.ToString();
             tb_Char.Text = countChars;
         }
