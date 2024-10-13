@@ -41,7 +41,7 @@ namespace Lab2
                     {
                         string content = await sr.ReadToEndAsync();
                         string filenames = Path.GetFileName(FileName);
-                        richTextBox1.AppendText($"Nội dung của file '{filenames}': {content}\n");
+                        richTextBox1.AppendText($"Nội dung của file '{filenames}':\n {content}\n");
                     }
                 }
 

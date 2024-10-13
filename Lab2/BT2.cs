@@ -41,7 +41,7 @@ namespace Lab2
                     {
                         if (sr.Peek() != -1)
                         {
-                            content.Append(line + "\r\n");
+                            content.Append(line + "\n");
                         }
                         else
                         {
