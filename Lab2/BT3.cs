@@ -28,7 +28,7 @@ namespace Lab2
             string input = tb_Input.Text;
             if (input != "")
             {
-                string inpFilePath = @"D:\0. UIT\HK3\LTMCB\3. Thuc Hanh\LAB_02\NT106_Lab2\Testcase\BT3\input.txt";
+                string inpFilePath = @"D:\input.txt";
                 UnicodeEncoding uniencoding = new UnicodeEncoding();
                 byte[] result = uniencoding.GetBytes(input);
                 using (FileStream writer = new FileStream(inpFilePath, FileMode.OpenOrCreate))
@@ -46,6 +46,7 @@ namespace Lab2
 
         private async void btn_Read_Click(object sender, EventArgs e)
         {
+            tb_Output.Text = "";
             ofd.Filter = "Tệp văn bản (*.txt) | *.txt";
             ofd.ShowDialog();
             string filePath = ofd.FileName;
@@ -95,7 +96,7 @@ namespace Lab2
                     output += res + Environment.NewLine;
 
                 }
-                else output += line + res + Environment.NewLine;
+                else output += line + " = " + res + Environment.NewLine;
                 content = content.Substring(index + 1);
                 index = content.IndexOf('\n');
             }
@@ -114,7 +115,7 @@ namespace Lab2
                 /*MessageBox.Show("Bugggg: " + content.IndexOf("\n"));*/
             }
 
-            string outFilePath = @"D:\0. UIT\HK3\LTMCB\3. Thuc Hanh\LAB_02\NT106_Lab2\Testcase\BT3\output.txt";
+            string outFilePath = @"D:output.txt";
             UnicodeEncoding uniencoding = new UnicodeEncoding();
             byte[] result = uniencoding.GetBytes(output);
             using (FileStream writer = new FileStream(outFilePath, FileMode.OpenOrCreate))
