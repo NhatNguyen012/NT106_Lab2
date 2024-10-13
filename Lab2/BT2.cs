@@ -63,9 +63,11 @@ namespace Lab2
             // Hiển thị URL
             tb_URL.Text = filePath;
             // Hiển thị số dòng
+            string text = tb_ShowText.Text;
+            countLines = text.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None).Length;
             tb_Line.Text = countLines.ToString();
             // Hiển thị số từ
-            string text = tb_ShowText.Text.Trim();
+            text = tb_ShowText.Text.Trim();
             /*string[] words = text.Split(' ');*/
             string[] words = text.Split(new char[] { ' ', ',', '.', ':', ';', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
             countWords = words.Length;
